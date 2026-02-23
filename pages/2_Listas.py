@@ -17,5 +17,13 @@ En este ejercicio debes crear un DataFrame partiendo de una **lista de listas** 
 st.subheader("Tu resultado:")
 # ESTUDIANTE: Escribe tu código a continuación
 
+invetario = [
+  ["Iphone 14 pro max","celular",3000000,5],
+  ["Lavadora","Electrodomestico",4000000,11],
+  ["Nevera","Electrodomestico",5000000,3],
+  ["Microondas","Electrodomestico",2000000,7]
+  ]
+df_inventario = pd.DataFrame(invetario, columns=["Nombre Producto", "Categoria", "Precio","Stock"])
 
+st.dataframe(df_inventario)
 # st.dataframe(...)
