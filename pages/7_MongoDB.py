@@ -21,3 +21,34 @@ st.markdown("Si no tienes la conexión real, escribe tu código usando `st.code(
 
 
 
+
+
+
+# A continuación se muestra un ejemplo de cómo conectar y obtener datos usando pymongo.
+# Si no cuentas con un clúster real, mantén todo dentro de st.code().
+
+codigo = """
+from pymongo import MongoClient
+import pandas as pd
+
+# URI de conexión (reemplazar con tus credenciales)
+MONGO_URI = "mongodb+srv://usuario:password@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority"
+
+# Crear cliente MongoDB
+client = MongoClient(MONGO_URI)
+
+# Seleccionar base de datos y colección
+# Suponemos que la base de datos se llama 'Veterinaria' y la colección 'mascotas'
+db = client["Veterinaria"]
+collection = db["mascotas"]
+
+# Extraer documentos (devuelve un cursor)
+documentos = list(collection.find())
+
+# Convertir a DataFrame
+df_mongo = pd.DataFrame(documentos)
+"""
+
+
+
+st.code(codigo, language="python")

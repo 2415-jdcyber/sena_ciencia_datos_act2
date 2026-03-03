@@ -20,5 +20,45 @@ st.markdown("Escribe en la parte de abajo el código que usarías para lograr el
 
 # ESTUDIANTE: Escribe tu código a continuación
 
+# Ejemplo teórico de cómo se haría la conexión y obtención de datos.
+# Si tuvieras un proyecto real, podrás ejecutar este bloque; de lo contrario
+# mantén todo dentro de st.code() para mostrar la idea.
 
+codigo = """
+# Importar librerías necesarias
+import firebase_admin
+from firebase_admin import credentials, firestore
+import pandas as pd
+
+# Cargar credenciales desde archivo
+cred = credentials.Certificate("llave_secreta.json")
+
+# Inicializar la app de Firebase
+firebase_admin.initialize_app(cred)
+
+# Obtener cliente de Firestore
+db = firestore.client()
+
+# Conectarse a la colección 'vehiculos'
+coleccion = db.collection("vehiculos")
+
+# Traer todos los documentos
+documentos = coleccion.stream()
+
+# Convertir documentos a diccionarios
+lista_vehiculos = []
+
+for doc in documentos:
+    data = doc.to_dict()   # Convertir documento a diccionario
+    data["id"] = doc.id
+    lista_vehiculos.append(data)
+
+# Convertir la lista a DataFrame
+df_firebase = pd.DataFrame(lista_vehiculos)
+
+# Mostrar DataFrame
+print(df_firebase)
+"""
+
+st.code(codigo, language="python")
 
